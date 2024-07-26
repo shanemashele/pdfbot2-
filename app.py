@@ -19,7 +19,7 @@ load_dotenv()
 groq_api_key = os.getenv('GROQ_API_KEY', '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')
 google_api_key = os.getenv('GOOGLE_API_KEY', 'AIzaSyDVPVSB2NZtL4zA4I-1eGQ2tjLtqoRFhNc')
 
-st.title("Gemma Model Document Q&A")
+st.title("Document Q&A")
 
 llm = ChatGroq(groq_api_key=groq_api_key, model_name="Llama3-8b-8192")
 
