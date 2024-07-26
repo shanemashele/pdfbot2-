@@ -11,16 +11,13 @@ from langchain_google_genai import GoogleGenerativeAIEmbeddings
 from dotenv import load_dotenv
 import io
 import PyPDF2
-import time  # Make sure to import the time module
+import time
 
 load_dotenv()
 
-GROQ_API_KEY="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"
-GOOGLE_API_KEY="AIzaSyDVPVSB2NZtL4zA4I-1eGQ2tjLtqoRFhNc"
-
 # Load the API keys
-groq_api_key =GROQ_API_KEY
-google_api_key = os.getenv('GOOGLE_API_KEY')
+groq_api_key = os.getenv('GROQ_API_KEY', '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')
+google_api_key = os.getenv('GOOGLE_API_KEY', 'AIzaSyDVPVSB2NZtL4zA4I-1eGQ2tjLtqoRFhNc')
 
 st.title("Gemma Model Document Q&A")
 
@@ -43,8 +40,15 @@ class Document:
         self.metadata = metadata if metadata else {}
 
 def vector_embedding(pdf_file):
+    # Check if Google API Key is available
+    if not google_api_key:
+        st.error("Google API key is missing. Please set the GOOGLE_API_KEY environment variable.")
+        return
 
-    st.session_state.embeddings = GoogleGenerativeAIEmbeddings(model="models/embedding-001")
+    st.session_state.embeddings = GoogleGenerativeAIEmbeddings(
+        google_api_key=google_api_key,  # Ensure the key is passed if required
+        model="models/embedding-001"
+    )
 
     # Load PDF and create document chunks
     pdf_reader = PyPDF2.PdfReader(pdf_file)
@@ -81,6 +85,6 @@ if st.button("Ask Question"):
         # With a Streamlit expander
         with st.expander("Document Similarity Search"):
             # Find the relevant chunks
-            for i, doc in enumerate(response["context"]):
+            for i, doc in enumerate(response.get("context", [])):
                 st.write(doc.page_content)
                 st.write("--------------------------------")
