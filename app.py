@@ -20,7 +20,7 @@ GOOGLE_API_KEY="AIzaSyDVPVSB2NZtL4zA4I-1eGQ2tjLtqoRFhNc"
 
 # Load the API keys
 groq_api_key =GROQ_API_KEY
-
+google_api_key=GOOGLE_API_KEY
 
 st.title("Gemma Model Document Q&A")
 
