@@ -15,9 +15,12 @@ import time  # Make sure to import the time module
 
 load_dotenv()
 
+GROQ_API_KEY="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"
+GOOGLE_API_KEY="AIzaSyDVPVSB2NZtL4zA4I-1eGQ2tjLtqoRFhNc"
+
 # Load the API keys
-groq_api_key = os.getenv('GROQ_API_KEY')
-os.environ["GOOGLE_API_KEY"] = os.getenv("GOOGLE_API_KEY")
+groq_api_key =GROQ_API_KEY
+
 
 st.title("Gemma Model Document Q&A")
 
