@@ -16,7 +16,7 @@ import time
 load_dotenv()
 
 # Load the API keys
-groq_api_key = os.getenv('GROQ_API_KEY', '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')
+groq_api_key = os.getenv('GROQ_API_KEY', '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')
 google_api_key = os.getenv('GOOGLE_API_KEY', 'AIzaSyDVPVSB2NZtL4zA4I-1eGQ2tjLtqoRFhNc')
 
 st.title("Document Q&A")
